@@ -28,6 +28,6 @@ public class BaseEntity {
     protected State state = State.ACTIVE;
 
     public enum State {
-        ACTIVE, INACTIVE;
+        ACTIVE, INACTIVE, DORMANT, BLOCKED;
     }
 }

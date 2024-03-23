@@ -41,14 +41,14 @@ public class UserController {
     @ResponseBody
     @PostMapping("")
     public BaseResponse<PostUserRes> createUser(@RequestBody PostUserReq postUserReq) {
-        // TODO: email 관련한 짧은 validation 예시입니다. 그 외 더 부가적으로 추가해주세요!
-        if(postUserReq.getEmail() == null){
-            return new BaseResponse<>(USERS_EMPTY_EMAIL);
+        validEmail(postUserReq.getEmail());
+        validPassword(postUserReq.getPassword());
+
+        int nameLength = postUserReq.getName().length();
+        if(nameLength>=1&&nameLength<=20){
+            return new BaseResponse<>(POST_USERS_INVALID_NAME);
         }
-        //이메일 정규표현
-        if(!isRegexEmail(postUserReq.getEmail())){
-            return new BaseResponse<>(POST_USERS_INVALID_EMAIL);
-        }
+
         PostUserRes postUserRes = userService.createUser(postUserReq);
         return new BaseResponse<>(postUserRes);
     }
@@ -132,6 +132,9 @@ public class UserController {
     public BaseResponse<PostLoginRes> logIn(@RequestBody PostLoginReq postLoginReq){
         // TODO: 로그인 값들에 대한 형식적인 validatin 처리해주셔야합니다!
         // TODO: 유저의 status ex) 비활성화된 유저, 탈퇴한 유저 등을 관리해주고 있다면 해당 부분에 대한 validation 처리도 해주셔야합니다.
+        validEmail(postLoginReq.getEmail());
+        validPassword(postLoginReq.getPassword());
+
         PostLoginRes postLoginRes = userService.logIn(postLoginReq);
         return new BaseResponse<>(postLoginRes);
     }
@@ -166,5 +169,26 @@ public class UserController {
         return new BaseResponse<>(getSocialOAuthRes);
     }
 
+    private void validEmail(String email){
+        if(email == null){
+            throw new BaseException(USERS_EMPTY_EMAIL);
+        }
+        //이메일 정규표현
+        if(!isRegexEmail(email)){
+            throw new BaseException(POST_USERS_INVALID_EMAIL);
+        }
+    }
+
+    private void validPassword(String password){
+        if(password==null){
+            throw new BaseException(USERS_EMPTY_PASSWORD);
+        }
+
+        int passwordLength = password.length();
+
+        if(passwordLength>=6&&passwordLength<=20){
+            throw new BaseException(POST_USERS_INVALID_PASSWORD);
+        }
+    }
 
 }
