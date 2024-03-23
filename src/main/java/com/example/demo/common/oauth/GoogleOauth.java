@@ -44,10 +44,10 @@ public class GoogleOauth implements SocialOauth {
     public String getOauthRedirectURL() {
 
         Map<String, Object> params = new HashMap<>();
-        params.put("scope", GOOGLE_DATA_ACCESS_SCOPE);
         params.put("response_type", "code");
         params.put("client_id", GOOGLE_SNS_CLIENT_ID);
         params.put("redirect_uri", GOOGLE_SNS_CALLBACK_LOGIN_URL);
+        params.put("scope", GOOGLE_DATA_ACCESS_SCOPE);
 
 
         //parameter를 형식에 맞춰 구성해주는 함수
@@ -55,7 +55,7 @@ public class GoogleOauth implements SocialOauth {
                 .map(x -> x.getKey() + "=" + x.getValue())
                 .collect(Collectors.joining("&"));
         String redirectURL = GOOGLE_SNS_URL + "?" + parameterString;
-        log.info("redirectURL = ", redirectURL);
+        log.info("redirectURL = {}", redirectURL);
 
         return redirectURL;
         /*

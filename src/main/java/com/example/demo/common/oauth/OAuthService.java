@@ -29,6 +29,9 @@ public class OAuthService {
             case GOOGLE:{
                 redirectURL= googleOauth.getOauthRedirectURL();
             }break;
+//            case KAKAO:{
+//                //redirectURL=
+//            }break;
             default:{
                 throw new BaseException(INVALID_OAUTH_TYPE);
             }

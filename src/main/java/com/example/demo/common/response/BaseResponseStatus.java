@@ -19,10 +19,17 @@ public enum BaseResponseStatus {
      */
 
     USERS_EMPTY_EMAIL(false, HttpStatus.BAD_REQUEST.value(), "이메일을 입력해주세요."),
+    USERS_EMPTY_PASSWORD(false, HttpStatus.BAD_REQUEST.value(), "비밀번호를 입력해주세요."),
     TEST_EMPTY_COMMENT(false, HttpStatus.BAD_REQUEST.value(), "코멘트를 입력해주세요."),
     POST_USERS_INVALID_EMAIL(false, HttpStatus.BAD_REQUEST.value(), "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,HttpStatus.BAD_REQUEST.value(),"중복된 이메일입니다."),
+    POST_USERS_EXISTS_DORMANT(false,HttpStatus.BAD_REQUEST.value(),"휴먼 계정이 있습니다."),
+    POST_USERS_EXISTS_BLOCKED(false,HttpStatus.BAD_REQUEST.value(),"차단된 계정이 있습니다."),
+    POST_USERS_EXISTS_INACTIVE(false,HttpStatus.BAD_REQUEST.value(),"탈퇴된 계정이 있습니다."),
     POST_TEST_EXISTS_MEMO(false,HttpStatus.BAD_REQUEST.value(),"중복된 메모입니다."),
+    POST_USERS_INVALID_PASSWORD(false, HttpStatus.BAD_REQUEST.value(), "비밀번호는 6~20자 이내여야 합니다."),
+    POST_USERS_INVALID_NAME(false, HttpStatus.BAD_REQUEST.value(), "사용자 아이디(이름)이 1~20자 이내여야 합니다."),
+
 
     RESPONSE_ERROR(false, HttpStatus.NOT_FOUND.value(), "값을 불러오는데 실패하였습니다."),
 

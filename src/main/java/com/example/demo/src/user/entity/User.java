@@ -20,7 +20,7 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 100)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String password;
 
     @Column(nullable = false, length = 30)
@@ -28,6 +28,11 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private boolean isOAuth;
+
+//    @Column(nullable = false)
+//    private String role;
+
+    //생일
 
     @Builder
     public User(Long id, String email, String password, String name, boolean isOAuth) {
